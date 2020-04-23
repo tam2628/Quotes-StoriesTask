@@ -13,3 +13,5 @@ function escape_event_data(event_obj){
 
     return event_obj;
 }
+
+module.exports = {escape_event_data};
