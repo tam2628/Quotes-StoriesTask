@@ -1,0 +1,25 @@
+<div class="row">
+    <div class="div" id="user-info-bar" style="height: 100px; padding: 10px; background-color:aliceblue; width: 100%;">
+        <div id="user-info-bar-image" style="height: 100%; display: inline-block;">
+            {{#if picture}}
+                <img class="img rounded-circle" style="display: inline-block; height:100%; width:auto;" src={{{picture}}}>
+            {{/if}}
+        </div>
+        <div style="display: inline-block; padding-left: 10px;">
+            <div>
+                {{#if name}}{{{name}}}{{/if}}<br>
+                {{#if email}}{{{email}}}{{/if}}
+            </div>
+        </div>
+    </div>
+</div>
+{{!-- events area --}}
+<div class="row">
+    <div style="margin-top: 20px;">
+        <a href="/events/create" class="btn btn-primary">Create Event</a>
+    </div>
+    <div id="events" style="margin-top:20px; width: 100%">
+        {{!-- All event will be displayed as list here --}}
+    </div>
+</div>
+<script src="/js/events.js"></script>
