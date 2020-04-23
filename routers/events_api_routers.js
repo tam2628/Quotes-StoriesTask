@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const jwt = require('jsonwebtoken');
 const jwt_secret = process.env.JWT_SECRET || 'secret';
-
+const {escape_event_data} = require('./utils/events');
 const CALENDER_EVENTS_ROUTE = 'https://www.googleapis.com/calendar/v3/calendars/primary/events';
 
 router.get('/', function(req, res){
@@ -33,13 +33,15 @@ router.post('/', function(req, res){
     const ACCESS_TOKEN = TOKEN.access_token;
     const json_event_data = req.body; 
 
+    const escaped_events = escape_event_data(json_event_data);
+    
     fetch(CALENDER_EVENTS_ROUTE, {
         method:'POST',
         headers: { 
             'Authorization' : `Bearer ${ACCESS_TOKEN}`,
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify(json_event_data)
+        body: JSON.stringify(escaped_events)
     }).then(response => {
         if(response.status === 200)
             return res.json();
